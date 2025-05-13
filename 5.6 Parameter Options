@@ -1,0 +1,35 @@
+Step 1 Modify the input file.
+Change the first line in ifconfig2.txt to "myifconig2".
+[root@openEuler ~]# sed -i '1c myifconfig2' ifconfig2.txt
+[root@openEuler ~]# cat ifconfig2.txt
+myifconfig2
+[root@openEuler ~]#
+Step 2 Execute multiple editing commands.
+Print the first line of ifconfig2.txt and insert "Network card configuration information"
+after the first line.
+[root@openEuler ~]# sed -e '1p' -e '1a Network card configuration information' ifconfig2.txt
+myifconfig2
+myifconfig2
+Network card configuration information
+[root@openEuler ~]#
+Step 3 Specify the sed script.
+Create the ifconfig2.sed script and perform the editing operations described in Step 2.
+[root@openEuler ~]# vim ifconfig2.sed
+[root@openEuler ~]# cat ifconfig2.sed
+#!/bin/sed -f
+1p
+1a Network card configuration information
+[root@openEuler ~]# sed -f ifconfig2.sed ifconfig2.txt
+myifconfig2
+myifconfig2
+Network card configuration information
+[root@openEuler ~]#
+
+
+Step 4 Cancel the default output.
+Cancel the default output when running commands and display only the changed lines.
+[root@openEuler ~]# sed -n '1aNetwork card configuration information' ifconfig2.txt
+Network card configuration information
+[root@openEuler ~]#
+
+
