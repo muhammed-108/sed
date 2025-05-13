@@ -1,0 +1,84 @@
+Step 1 Insert before specified lines.
+Insert one line before the first line in the NIC configuration information.
+[root@openEuler ~]# ifconfig | sed '1iNetwork card configuration information'
+Network card configuration information
+ens3: flags=4163<UP,BROADCAST,RUNNING,MULTICAST> mtu 1500
+ inet 192.168.0.22 netmask 255.255.255.0 broadcast 192.168.0.255
+ inet6 fe80::f816:3eff:fe5d:b5cb prefixlen 64 scopeid 0x20<link>
+ ether fa:16:3e:5d:b5:cb txqueuelen 1000 (Ethernet)
+ RX packets 129196 bytes 55514263 (52.9 MiB)
+ RX errors 0 dropped 0 overruns 0 frame 0
+ TX packets 120085 bytes 13088784 (12.4 MiB)
+ TX errors 0 dropped 0 overruns 0 carrier 0 collisions 0
+lo: flags=73<UP,LOOPBACK,RUNNING> mtu 65536
+ inet 127.0.0.1 netmask 255.0.0.0
+ inet6 ::1 prefixlen 128 scopeid 0x10<host>
+ loop txqueuelen 1000 (Local Loopback)
+ RX packets 0 bytes 0 (0.0 B)
+ RX errors 0 dropped 0 overruns 0 frame 0
+ TX packets 0 bytes 0 (0.0 B)
+ TX errors 0 dropped 0 overruns 0 carrier 0 collisions 0
+[root@openEuler ~]#
+Step 2 Insert after specified lines.
+Insert one line after the first line in the NIC configuration information.
+[root@openEuler ~]# ifconfig | sed '1aNetwork card configuration information'
+ens3: flags=4163<UP,BROADCAST,RUNNING,MULTICAST> mtu 1500
+Network card configuration information
+ inet 192.168.0.22 netmask 255.255.255.0 broadcast 192.168.0.255
+ inet6 fe80::f816:3eff:fe5d:b5cb prefixlen 64 scopeid 0x20<link>
+ ether fa:16:3e:5d:b5:cb txqueuelen 1000 (Ethernet)
+ RX packets 129257 bytes 55519729 (52.9 MiB)
+ RX errors 0 dropped 0 overruns 0 frame 0
+ TX packets 120138 bytes 13094862 (12.4 MiB)
+ TX errors 0 dropped 0 overruns 0 carrier 0 collisions 0
+lo: flags=73<UP,LOOPBACK,RUNNING> mtu 65536
+ inet 127.0.0.1 netmask 255.0.0.0
+ inet6 ::1 prefixlen 128 scopeid 0x10<host>
+ loop txqueuelen 1000 (Local Loopback)
+ RX packets 0 bytes 0 (0.0 B)
+ RX errors 0 dropped 0 overruns 0 frame 0
+ TX packets 0 bytes 0 (0.0 B)
+ TX errors 0 dropped 0 overruns 0 carrier 0 collisions 0
+[root@openEuler ~]#
+
+
+Step 3 Delete specified lines.
+Delete the first line in the NIC configuration information.
+[root@openEuler ~]# ifconfig | sed '1d'
+ inet 192.168.0.22 netmask 255.255.255.0 broadcast 192.168.0.255
+ inet6 fe80::f816:3eff:fe5d:b5cb prefixlen 64 scopeid 0x20<link>
+ ether fa:16:3e:5d:b5:cb txqueuelen 1000 (Ethernet)
+ RX packets 129383 bytes 55530875 (52.9 MiB)
+RX errors 0 dropped 0 overruns 0 frame 0
+ TX packets 120233 bytes 13105352 (12.4 MiB)
+ TX errors 0 dropped 0 overruns 0 carrier 0 collisions 0
+lo: flags=73<UP,LOOPBACK,RUNNING> mtu 65536
+ inet 127.0.0.1 netmask 255.0.0.0
+ inet6 ::1 prefixlen 128 scopeid 0x10<host>
+ loop txqueuelen 1000 (Local Loopback)
+ RX packets 0 bytes 0 (0.0 B)
+ RX errors 0 dropped 0 overruns 0 frame 0
+ TX packets 0 bytes 0 (0.0 B)
+ TX errors 0 dropped 0 overruns 0 carrier 0 collisions 0
+[root@openEuler ~]#
+Step 4 Replace specified lines.
+Replace the first line in the NIC configuration information.
+[root@openEuler ~]# ifconfig | sed '1cNetwork card configuration information'
+Network card configuration information
+ inet 192.168.0.22 netmask 255.255.255.0 broadcast 192.168.0.255
+ inet6 fe80::f816:3eff:fe5d:b5cb prefixlen 64 scopeid 0x20<link>
+ ether fa:16:3e:5d:b5:cb txqueuelen 1000 (Ethernet)
+ RX packets 129453 bytes 55537071 (52.9 MiB)
+ RX errors 0 dropped 0 overruns 0 frame 0
+ TX packets 120289 bytes 13111608 (12.5 MiB)
+ TX errors 0 dropped 0 overruns 0 carrier 0 collisions 0
+lo: flags=73<UP,LOOPBACK,RUNNING> mtu 65536
+ inet 127.0.0.1 netmask 255.0.0.0
+ inet6 ::1 prefixlen 128 scopeid 0x10<host>
+ loop txqueuelen 1000 (Local Loopback)
+ RX packets 0 bytes 0 (0.0 B)
+ RX errors 0 dropped 0 overruns 0 frame 0
+ TX packets 0 bytes 0 (0.0 B)
+ TX errors 0 dropped 0 overruns 0 carrier 0 collisions 0
+[root@openEuler ~]#
+
