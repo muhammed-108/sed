@@ -1,0 +1,85 @@
+Step 1 Replace the first matched content in the search.
+Replace the first "255" of each line in the NIC information with "11111111".
+[root@openEuler ~]# ifconfig | sed 's/255/11111111/'
+ens3: flags=4163<UP,BROADCAST,RUNNING,MULTICAST> mtu 1500
+ inet 192.168.0.22 netmask 11111111.255.255.0 broadcast 192.168.0.255
+ inet6 fe80::f816:3eff:fe5d:b5cb prefixlen 64 scopeid 0x20<link>
+ ether fa:16:3e:5d:b5:cb txqueuelen 1000 (Ethernet)
+ RX packets 129819 bytes 55567269 (52.9 MiB)
+ RX errors 0 dropped 0 overruns 0 frame 0
+TX packets 120546 bytes 13141330 (12.5 MiB)
+ TX errors 0 dropped 0 overruns 0 carrier 0 collisions 0
+lo: flags=73<UP,LOOPBACK,RUNNING> mtu 65536
+ inet 127.0.0.1 netmask 11111111.0.0.0
+ inet6 ::1 prefixlen 128 scopeid 0x10<host>
+ loop txqueuelen 1000 (Local Loopback)
+ RX packets 0 bytes 0 (0.0 B)
+ RX errors 0 dropped 0 overruns 0 frame 0
+ TX packets 0 bytes 0 (0.0 B)
+ TX errors 0 dropped 0 overruns 0 carrier 0 collisions 0
+[root@openEuler ~]#
+
+
+Step 2 Search and replace all the matched content.
+Replace every "255" in the NIC information with "11111111".
+[root@openEuler ~]# ifconfig | sed 's/255/11111111/g'
+ens3: flags=4163<UP,BROADCAST,RUNNING,MULTICAST> mtu 1500
+ inet 192.168.0.22 netmask 11111111.11111111.11111111.0 broadcast 192.168.0.11111111
+ inet6 fe80::f816:3eff:fe5d:b5cb prefixlen 64 scopeid 0x20<link>
+ ether fa:16:3e:5d:b5:cb txqueuelen 1000 (Ethernet)
+ RX packets 129829 bytes 55568127 (52.9 MiB)
+ RX errors 0 dropped 0 overruns 0 frame 0
+ TX packets 120561 bytes 13143500 (12.5 MiB)
+ TX errors 0 dropped 0 overruns 0 carrier 0 collisions 0
+lo: flags=73<UP,LOOPBACK,RUNNING> mtu 65536
+ inet 127.0.0.1 netmask 11111111.0.0.0
+ inet6 ::1 prefixlen 128 scopeid 0x10<host>
+ loop txqueuelen 1000 (Local Loopback)
+ RX packets 0 bytes 0 (0.0 B)
+ RX errors 0 dropped 0 overruns 0 frame 0
+ TX packets 0 bytes 0 (0.0 B)
+ TX errors 0 dropped 0 overruns 0 carrier 0 collisions 0
+[root@openEuler ~]#
+Step 3 Search and replace by using custom separators.
+Replace the slash (/) with the at sign (@) for search.
+[root@openEuler ~]# ifconfig | sed 's@RX@Receive@'
+ens3: flags=4163<UP,BROADCAST,RUNNING,MULTICAST> mtu 1500
+ inet 192.168.0.22 netmask 255.255.255.0 broadcast 192.168.0.255
+ inet6 fe80::f816:3eff:fe5d:b5cb prefixlen 64 scopeid 0x20<link>
+ ether fa:16:3e:5d:b5:cb txqueuelen 1000 (Ethernet)
+ Receive packets 130033 bytes 55584699 (53.0 MiB)
+ Receive errors 0 dropped 0 overruns 0 frame 0
+ TX packets 120713 bytes 13166204 (12.5 MiB)
+ TX errors 0 dropped 0 overruns 0 carrier 0 collisions 0
+lo: flags=73<UP,LOOPBACK,RUNNING> mtu 65536
+ inet 127.0.0.1 netmask 255.0.0.0
+inet6 ::1 prefixlen 128 scopeid 0x10<host>
+ loop txqueuelen 1000 (Local Loopback)
+ Receive packets 0 bytes 0 (0.0 B)
+ Receive errors 0 dropped 0 overruns 0 frame 0
+ TX packets 0 bytes 0 (0.0 B)
+ TX errors 0 dropped 0 overruns 0 carrier 0 collisions 0
+[root@openEuler ~]#
+
+
+Step 4 Reference a search string in a replacement string.
+The text matched by the search string "RX" replaces & in the replacement string.
+[root@openEuler ~]# ifconfig | sed 's/RX/&:Receive/'
+ens3: flags=4163<UP,BROADCAST,RUNNING,MULTICAST> mtu 1500
+ inet 192.168.0.22 netmask 255.255.255.0 broadcast 192.168.0.255
+ inet6 fe80::f816:3eff:fe5d:b5cb prefixlen 64 scopeid 0x20<link>
+ ether fa:16:3e:5d:b5:cb txqueuelen 1000 (Ethernet)
+ RX:Receive packets 130080 bytes 55588485 (53.0 MiB)
+ RX:Receive errors 0 dropped 0 overruns 0 frame 0
+ TX packets 120746 bytes 13170194 (12.5 MiB)
+ TX errors 0 dropped 0 overruns 0 carrier 0 collisions 0
+lo: flags=73<UP,LOOPBACK,RUNNING> mtu 65536
+ inet 127.0.0.1 netmask 255.0.0.0
+ inet6 ::1 prefixlen 128 scopeid 0x10<host>
+ loop txqueuelen 1000 (Local Loopback)
+ RX:Receive packets 0 bytes 0 (0.0 B)
+ RX:Receive errors 0 dropped 0 overruns 0 frame 0
+ TX packets 0 bytes 0 (0.0 B)
+ TX errors 0 dropped 0 overruns 0 carrier 0 collisions 0
+[root@openEuler ~]#
+
