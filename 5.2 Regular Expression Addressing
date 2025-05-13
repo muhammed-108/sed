@@ -1,0 +1,11 @@
+Step 1 Match lines using common regular expressions.
+View the lines that contain "192" in the NIC information.
+[root@openEuler ~]# ifconfig | sed -n '/192/p'
+ inet 192.168.0.22 netmask 255.255.255.0 broadcast 192.168.0.255
+[root@openEuler ~]#
+Step 2 Match lines using extended regular expressions.
+View the lines that contain six consecutive digits in the NIC information.
+[root@openEuler ~]# ifconfig | sed -rn '/[0-9]{6}/p'
+ RX packets 129004 bytes 55498555 (52.9 MiB)
+ TX packets 119919 bytes 13071368 (12.4 MiB)
+[root@openEuler ~]#
