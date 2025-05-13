@@ -1,0 +1,24 @@
+Step 1 Read content from another file.
+Read the content from the NIC configurations, insert the read content after the first line
+of the ifconfig1.txt file, and the ifconfig1.txt file is not edited.
+[root@openEuler ~]# echo 'myifconfig' > ifconfig1.txt
+[root@openEuler ~]# sed '1r /etc/sysconfig/network-scripts/ifcfg-ens3' ifconfig1.txt
+myifconfig
+# Created by cloud-init on instance boot automatically, do not edit.
+#
+BOOTPROTO=dhcp
+DEVICE=ens3
+HWADDR=fa:16:3e:5d:b5:cb
+ONBOOT=yes
+TYPE=Ethernet
+USERCTL=no
+[root@openEuler ~]#
+
+
+Step 2 Save content as another file.
+Save the first line of the ifconfig1.txt file to the ifconfig2.txt file.
+[root@openEuler ~]# sed '1w ifconfig2.txt' ifconfig1.txt
+myifconfig
+[root@openEuler ~]# cat ifconfig2.txt
+myifconfig
+[root@openEuler ~]#
