@@ -1,0 +1,52 @@
+Step 1 Match a single line.
+[root@openEuler ~]# ifconfig | grep -n ''
+1:ens3: flags=4163<UP,BROADCAST,RUNNING,MULTICAST> mtu 1500
+2: inet 192.168.0.22 netmask 255.255.255.0 broadcast 192.168.0.255
+3: inet6 fe80::f816:3eff:fe5d:b5cb prefixlen 64 scopeid 0x20<link>
+4: ether fa:16:3e:5d:b5:cb txqueuelen 1000 (Ethernet)
+5: RX packets 128447 bytes 55452425 (52.8 MiB)
+6: RX errors 0 dropped 0 overruns 0 frame 0
+7: TX packets 119518 bytes 13028554 (12.4 MiB)
+8: TX errors 0 dropped 0 overruns 0 carrier 0 collisions 0
+9:
+10:lo: flags=73<UP,LOOPBACK,RUNNING> mtu 65536
+11: inet 127.0.0.1 netmask 255.0.0.0
+12: inet6 ::1 prefixlen 128 scopeid 0x10<host>
+13: loop txqueuelen 1000 (Local Loopback)
+14: RX packets 0 bytes 0 (0.0 B)
+15: RX errors 0 dropped 0 overruns 0 frame 0
+16: TX packets 0 bytes 0 (0.0 B)
+17: TX errors 0 dropped 0 overruns 0 carrier 0 collisions 0
+18:
+[root@openEuler ~]#
+View line 2 in the NIC information.
+[root@openEuler ~]# ifconfig | sed -n '2p'
+ inet 192.168.0.22 netmask 255.255.255.0 broadcast 192.168.0.255
+[root@openEuler ~]#
+Step 2 Match multiple specified lines.
+View lines 2 to 3 in the NIC information.
+[root@openEuler ~]# ifconfig | sed -n '2,3p'
+ inet 192.168.0.22 netmask 255.255.255.0 broadcast 192.168.0.255
+ inet6 fe80::f816:3eff:fe5d:b5cb prefixlen 64 scopeid 0x20<link>
+[root@openEuler ~]#
+Step 3 Match lines by the specified step.
+Print from line 1 with a step of 2 in the NIC information.
+[root@openEuler ~]# ifconfig | sed -n '1~2p'
+ens3: flags=4163<UP,BROADCAST,RUNNING,MULTICAST> mtu 1500
+ inet6 fe80::f816:3eff:fe5d:b5cb prefixlen 64 scopeid 0x20<link>
+ RX packets 128587 bytes 55463781 (52.8 MiB)
+ TX packets 119617 bytes 13039916 (12.4 MiB)
+ inet 127.0.0.1 netmask 255.0.0.0
+ loop txqueuelen 1000 (Local Loopback)
+ RX errors 0 dropped 0 overruns 0 frame 0
+ TX errors 0 dropped 0 overruns 0 carrier 0 collisions 0
+[root@openEuler ~]
+
+Step 4 Match n lines after the specified line.
+View line 2 and the following three lines in the NIC information.
+[root@openEuler ~]# ifconfig | sed -n '2,+3p'
+ inet 192.168.0.22 netmask 255.255.255.0 broadcast 192.168.0.255
+ inet6 fe80::f816:3eff:fe5d:b5cb prefixlen 64 scopeid 0x20<link>
+ ether fa:16:3e:5d:b5:cb txqueuelen 1000 (Ethernet)
+ RX packets 128614 bytes 55465947 (52.8 MiB)
+[root@openEuler ~]#
